@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="estilo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Saira+Stencil+One&display=swap" rel="stylesheet">
     <link rel="icon" href="./img/logo-icon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
@@ -19,24 +19,7 @@
         </div>
 
         <div class="player-area">
-            <div class="casillas-play" id="player">
-                <div class="round-counter" id="player-rounds">Rondas ganadas: 0</div>
-                <div class="player-card">
-                    <h2>Jugador</h2>
-                    <div id="player-choice" class="choice">
-                        <img id="player-img" src="./img/Jugador.png" alt="Elección del jugador" class="choice-img" style="display:flex;">
-                    </div>
-                    <div class="health-bar">
-                        <div class="health-fill" id="health-player"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="result">
-                <h2>¡Haz tu jugada!</h2>
-            </div>
-
-            <div class="casillas-play" id="computer">
+              <div class="casillas-play" id="computer">
                  <div class="round-counter" id="computer-rounds">Rondas ganadas: 0</div>
                 <div class="player-card">
                     <h2>Computadora</h2>
@@ -45,6 +28,24 @@
                     </div>
                      <div class="health-bar">
                         <div class="health-fill" id="health-computer"></div>
+                    </div>
+                </div>
+            </div>
+           
+
+            <div id="result">
+                <h2>¡Haz tu jugada!</h2>
+            </div>
+
+           <div class="casillas-play" id="player">
+                <div class="round-counter" id="player-rounds">Rondas ganadas: 0</div>
+                <div class="player-card">
+                    <h2>Jugador</h2>
+                    <div id="player-choice" class="choice">
+                        <img id="player-img" src="./img/Jugador.png" alt="Elección del jugador" class="choice-img" style="display:flex;">
+                    </div>
+                    <div class="health-bar">
+                        <div class="health-fill" id="health-player"></div>
                     </div>
                 </div>
             </div>
@@ -66,9 +67,9 @@
             <button id="new-game-btn">Nueva Partida</button>
         </div>
 
-        </div>
+    </div>
 
-    <script src="funcion.js"></script>
+    <script src="funcion_2.0.js"></script>
 </body>
 </html>
 

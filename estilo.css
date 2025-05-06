@@ -6,320 +6,103 @@
     padding: 0;
     box-sizing: border-box;
     /* Aplica la fuente Oswald por defecto, negrita */
-    font-family: "Oswald", sans-serif;
     font-weight: bold;
 }
+img{
+    width: 100px;
+}
 
-/* --- Estilos del Body --- */
 body {
-    /* Fondo oscuro para toda la página */
-    background-color: #1f2937;
-    /* Centra el contenedor del juego vertical y horizontalmente */
+    background-color: #011e26;
     display: grid;
     place-items: center;
-    /* Asegura que el body ocupe toda la altura de la ventana */
     height: 100vh;
 }
 
-/* --- Contenedor Principal del Juego --- */
+/* estilo del contenedor principal */
 .game-container {
-    /* Fondo claro para el contenedor */
-    background: #f9fafb;
-    /* Define la estructura de filas (Título, Área de Jugadores, Botones, Controles) */
-    display: grid;
-    /* Alturas relativas para las filas */
-    grid-template-rows: 7vh 50vh 25vh 10vh;
-    /* Centra el texto dentro del contenedor por defecto */
-    text-align: center;
-    /* Bordes redondeados */
-    border-radius: 10px;
-    /* Borde verde */
-    border: 3px solid #10b981;
-    /* Sombra suave */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-    /* Espaciado interno */
-    padding: 20px;
-    /* Altura casi total de la ventana */
-    height: 99vh;
-    /* Ancho del 70% del contenedor padre (body) */
-    width: 90%;
-}
-
-/* --- Título del Juego --- */
-.title {
-    /* Color de fondo para la sección del título (opcional, puedes quitarlo si prefieres el fondo general) */
-    /* background-color: #2563eb; */
-    /* Centra el h1 verticalmente si es necesario */
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    height: 100vh;
+    width: 90%;
+    padding: 1rem;
+    background-color: #f9f3d9;
+    border-radius: 1rem;
+    border: 2px solid #ffbb00;
+    text-align: center;
 }
 
-.title h1 {
-	width: 100%;
-	font-size: 1rem;
-    /* Fuente especial para el título */
-    font-family: "Bungee Spice", sans-serif;
-    /* Peso normal para esta fuente específica */
+/* estilo del titulo */
+.title {
+    font-size: 0.8rem;
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    color: #1f2937; /* Color oscuro para el título */
+    font-variation-settings:
+      "MORF" 15,
+      "SHLN" 50;
+    margin-bottom: 1.5rem;
+    height: 2rem;
 }
 
-/* --- Área de Jugadores (Jugador, Resultado, Computadora) --- */
+/* estilo del area de juego */
 .player-area {
-    /* Divide el área en 3 columnas de igual tamaño */
+    height: 100vh;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    /* Centra los elementos (player-card, result) dentro de sus columnas */
-    place-items: center;
-    /* Color de fondo para depuración (puedes quitarlo) */
-    /* background-color: orange; */
-    width: 100%; /* Asegura que ocupe todo el ancho disponible */
-    align-items: start; /* Alinea las tarjetas al inicio verticalmente */
-    padding-top: 20px; /* Añade espacio arriba */
+    font-family: "Saira Stencil One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.8rem;
 }
 
-#computer {
-	display: flex;
-	flex-direction: column-reverse;
-}
+.casillas-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-/* --- Contador de Rondas --- */
-.round-counter {
-    font-weight: bold;
-    color: #1f2937; /* Color oscuro */
-    font-size: 1.3rem; /* Tamaño de fuente */
-    margin-bottom: 15px; /* Espacio debajo del contador */
 }
-
-/* --- Tarjeta de Jugador/Computadora --- */
 .player-card {
-    /* Organiza los elementos internos (h2, choice, health-bar) en columna */
+    font-size: 70%;
+    height:10rem;
+    width: 10rem;
+    border: 2px solid #ffbb00;
     display: flex;
     flex-direction: column;
-    /* Centra los elementos horizontalmente */
     align-items: center;
-    /* Espaciado interno */
-    padding: 10px;
-    /* Bordes redondeados */
-    border-radius: 8px;
-    /* Ancho fijo */
-    width: 100px;
-    /* Alto fijo */
-    height: 150px;
-    /* Espacio entre elementos internos */
-    gap: 10px;
-    /* Fondo gris claro */
-    background-color: #f2f2f2;
-    border: 1px solid #d1d5db; /* Borde sutil */
+    justify-content: center;
+    border-radius: 1rem;
 }
 
-.player-card h2 {
-    /* Fuente especial para "Jugador" y "Computadora" */
-    font-family: "Bungee Spice", sans-serif;
-    font-weight: 400; /* Peso normal para esta fuente */
-    font-size: 70%; /* Tamaño ajustado */
-    color: #374151; /* Color gris oscuro */
-}
-
-/* --- Contenedor de la Imagen de Elección --- */
-.choice {
-    /* Centra la imagen dentro del contenedor */
-    display: grid;
-    place-items: center;
-    /* Tamaño fijo */
-    height: 100%;
-    width:100%;
-    /* Fondo gris más claro */
-    background-color: #e1e1e1;
-    /* Bordes redondeados */
-    border-radius: 8px;
-    overflow: hidden; /* Asegura que la imagen no se salga */
-    border: 1px solid #ccc; /* Borde ligero */
-}
-
-/* --- Imagen de Elección (Piedra, Papel, Tijera) --- */
-.choice-img {
-    /* Ajusta el tamaño de la imagen al contenedor */
-    width: 60%; /* Usa 100% para llenar el contenedor .choice */
-    height: 80%;
-    /* Asegura que la imagen se escale bien sin distorsionarse */
-    object-fit: contain;
-}
-
-/* --- Barra de Vida --- */
 .health-bar {
-    /* Ocupa todo el ancho de la tarjeta */
     width: 100%;
-    /* Fondo gris claro como base */
-    background: #e5e7eb;
-    /* Bordes redondeados */
-    border-radius: 8px;
-    /* Altura fija */
-    height: 20px;
-    /* Oculta lo que se salga (el relleno de vida) */
-    overflow: hidden;
-    /* Borde gris */
-    border: 2px solid #9ca3af;
+    background-color: #ffbb00;
 }
 
-/* --- Relleno de la Barra de Vida --- */
-.health-fill {
-    /* Ocupa toda la altura de la barra */
-    height: 100%;
-    /* Ancho inicial completo (se ajustará con JS) */
-    width: 100%;
-    /* Gradiente verde como color de vida */
-    background: linear-gradient(to right, #10b981, #22c55e);
-    /* Transición suave cuando cambia el ancho */
-    transition: width 0.4s ease-in-out;
-}
-
-/* --- Animación para Vida Crítica --- */
-@keyframes blink-red {
-    0%, 100% { background: #ef4444; } /* Rojo */
-    50% { background: #f87171; } /* Rojo más claro */
-}
-
-/* Aplica la animación cuando la barra tiene la clase 'critical' (añadida por JS) */
-.health-fill.critical {
-    animation: blink-red 0.5s infinite;
-}
-
-/* --- Área de Resultado del Turno --- */
-#result {
-    /* Centra el texto */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* Color de fondo para depuración (puedes quitarlo) */
-    /* background-color: #e5e7eb; */
-    padding: 10px;
-    height: 100%; /* Ocupa la altura disponible en su celda grid */
-}
-
-#result h2 {
-    font-size: 1rem; /* Tamaño del texto del resultado */
-    color: #1f2937; /* Color oscuro */
-    font-weight: bold;
-	text-align: center;
-}
-
-/* --- Área de Botones de Elección --- */
-/* Se usa .choices basado en el HTML corregido */
+/* estilo de las cartas */
 .choices {
-    /* Centra los botones horizontal y verticalmente */
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    /* Espacio entre los botones */
-    gap: 20px; /* Aumenta el espacio entre botones */
-    /* Color de fondo para depuración (puedes quitarlo) */
-    /* background-color: #2563eb; */
-    padding: 10px; /* Añade algo de padding */
+    width: 100%;
+    gap: 1em;
+    margin-bottom: 1rem;
 }
 
-/* --- Botones de Elección (Piedra, Papel, Tijera) --- */
 .game-button {
-    /* Quita el borde por defecto */
-    border: none;
-    /* Fondo transparente inicialmente */
-    background-color: transparent;
-    /* Bordes redondeados */
-    border-radius: 10px;
-    /* Cursor de mano al pasar por encima */
-    cursor: pointer;
-    /* Transición suave para efectos hover */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    padding: 5px; /* Pequeño padding alrededor de la imagen */
+    height: 8rem;
+    width: 6rem;
+    border-radius: 0.7rem;
+    border: 2px solid #15af8d;
 }
-
-.game-button:hover {
-    /* Efecto de elevación al pasar el ratón */
-    transform: translateY(-5px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Deshabilitado visualmente */
-.game-button:disabled {
-    opacity: 0.5; /* Reduce opacidad */
-    cursor: not-allowed; /* Cambia el cursor */
-    transform: none; /* Quita efectos hover */
-    box-shadow: none;
-}
-
-
 .game-button img {
-    /* Tamaño de las imágenes dentro de los botones */
-    width: 100px;
-    height: 100px; /* Asegura que sean cuadradas si las imágenes lo son */
-    object-fit: contain; /* Escala bien la imagen */
-    display: block; /* Evita espacios extra debajo de la imagen */
-    transition: transform 0.2s ease; /* Transición para el hover de la imagen */
+    width: 100%;
+    height: 100%;
 }
-
-.game-button:hover img {
-    /* Agranda ligeramente la imagen al pasar el ratón por el botón */
-    transform: scale(1.1);
-}
-
-/* --- Controles (Botón Nueva Partida) --- */
-.controls {
-    /* Centra el botón horizontal y verticalmente */
-    display: grid;
-    place-items: center;
-    /* Color de fondo para depuración (puedes quitarlo) */
-    /* background-color: #8e929b; */
-}
-
-/* --- Botón de Nueva Partida --- */
-#new-game-btn {
-    /* Espaciado interno */
-    padding: 12px 25px;
-    /* Tamaño de fuente */
-    font-size: 1.1rem;
-    /* Color de texto */
-    color: white;
-    /* Sin borde */
-    border: none;
-    /* Bordes redondeados */
-    border-radius: 8px;
-    /* Cursor de mano */
-    cursor: pointer;
-    /* Color de fondo azul */
-    background-color: #2563eb;
-    /* Transición suave para el hover */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
-    text-transform: uppercase; /* Texto en mayúsculas */
-    letter-spacing: 1px; /* Espacio entre letras */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-#new-game-btn:hover {
-    /* Color de fondo ligeramente más oscuro al pasar el ratón */
-    background-color: #1d4ed8;
-    /* Efecto de presión */
-    transform: translateY(1px);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15); /* Sombra reducida */
-}
-
-/* --- Estilos de Resultado (Winner, Loser, Tie) --- */
-/* Estos estilos se aplican a los divs con id="player-choice" y id="computer-choice" */
-.choice.winner {
-    border: 4px solid #10b981; /* Borde verde para ganador */
-    box-shadow: 0 0 15px #10b981; /* Resplandor verde */
-}
-
-.choice.loser {
-    border: 4px solid #ef4444; /* Borde rojo para perdedor */
-    box-shadow: 0 0 15px #ef4444; /* Resplandor rojo */
-    opacity: 0.7; /* Ligeramente transparente */
-}
-
-.choice.tie {
-    border: 4px solid #6b7280; /* Borde gris para empate */
-    box-shadow: 0 0 15px #6b7280; /* Resplandor gris */
+.game-button img:hover {
+    height: 120%;
+    width: 110%;
 }
