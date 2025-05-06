@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piedra, Papel o Tijera</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    :root {
+      --primary: #3a0ca3;
+      --secondary: #4361ee;
+      --accent: #4cc9f0;
+      --bg: #f1f1f1;
+      --danger: #ef476f;
+      --success: #06d6a0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: var(--primary);
+    }
+
+    .game-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .choice {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .choice:hover {
+      transform: scale(1.1);
+    }
+
+    .status {
+      text-align: center;
+    }
+
+    #result {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .health-bars, .rounds {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .bar-container {
+      width: 45%;
+      background: #ccc;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 20px;
+      background: var(--success);
+      width: 100%;
+      transition: width 0.4s;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: var(--secondary);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--primary);
+    }
+
+    @media (max-width: 500px) {
+      .choice {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Piedra, Papel o Tijera</h1>
+  <div class="game-area">
+    <div class="health-bars">
+      <div class="bar-container">
+        <div id="health-player" class="bar"></div>
+      </div>
+      <div class="bar-container">
+        <div id="health-computer" class="bar"></div>
+      </div>
+    </div>
+    <div class="rounds">
+      <div id="player-rounds">Rondas ganadas: 0</div>
+      <div id="computer-rounds">Rondas ganadas: 0</div>
+    </div>
+    <div class="choices">
+      <img src="piedra.png" alt="Piedra" class="choice" onclick="playRound('piedra')" />
+      <img src="papel.png" alt="Papel" class="choice" onclick="playRound('papel')" />
+      <img src="tijera.png" alt="Tijera" class="choice" onclick="playRound('tijera')" />
+    </div>
+    <div class="status">
+      <div id="result">👉 Elige tu jugada</div>
+    </div>
+    <button id="new-game-btn">Nueva Partida</button>
+  </div>
+
+  <script>
+    let playerHealth = 100;
+    let computerHealth = 100;
+    let playerRounds = 0;
+    let computerRounds = 0;
+    let gameOver = false;
+
+    document.getElementById("new-game-btn").addEventListener("click", startNewGame);
+
+    function playRound(playerChoice) {
+      if (gameOver) return;
+
+      const computerChoice = getRandomChoice();
+      const result = determineWinner(playerChoice, computerChoice);
+
+      if (result === 'player') {
+        computerHealth -= 20;
+        playerRounds++;
+      } else if (result === 'computer') {
+        playerHealth -= 20;
+        computerRounds++;
+      }
+
+      updateHealthBars();
+      updateRoundCounters();
+      updateResultMessage(result);
+
+      if (playerHealth <= 0 || computerHealth <= 0) {
+        gameOver = true;
+        showEndMessage();
+        return;
+      }
+
+      setTimeout(() => {
+        resetVisuals();
+        document.getElementById("result").textContent = "👉 Elige tu jugada para la siguiente ronda";
+      }, 1000);
+    }
+
+    function getRandomChoice() {
+      const choices = ['piedra', 'papel', 'tijera'];
+      return choices[Math.floor(Math.random() * 3)];
+    }
+
+    function determineWinner(player, computer) {
+      if (player === computer) return 'empate';
+      if ((player === 'piedra' && computer === 'tijera') ||
+          (player === 'papel' && computer === 'piedra') ||
+          (player === 'tijera' && computer === 'papel')) {
+        return 'player';
+      } else {
+        return 'computer';
+      }
+    }
+
+    function updateHealthBars() {
+      document.getElementById("health-player").style.width = playerHealth + "%";
+      document.getElementById("health-computer").style.width = computerHealth + "%";
+    }
+
+    function updateRoundCounters() {
+      document.getElementById("player-rounds").textContent = `Rondas ganadas: ${playerRounds}`;
+      document.getElementById("computer-rounds").textContent = `Rondas ganadas: ${computerRounds}`;
+    }
+
+    function updateResultMessage(result) {
+      const resultBox = document.getElementById("result");
+      if (result === "player") {
+        resultBox.textContent = "✅ Ganaste esta ronda";
+      } else if (result === "computer") {
+        resultBox.textContent = "❌ Perdiste esta ronda";
+      } else {
+        resultBox.textContent = "🤝 Empate";
+      }
+    }
+
+    function showEndMessage() {
+      const resultBox = document.getElementById("result");
+      if (playerHealth <= 0) {
+        resultBox.textContent = "💀 Has perdido la partida. Pulsa 'Nueva Partida' para intentar de nuevo.";
+      } else {
+        resultBox.textContent = "🏆 Has ganado la partida. Pulsa 'Nueva Partida' para otra vuelta.";
+      }
+    }
+
+    function resetVisuals() {
+      // Aquí podrías reiniciar animaciones, ocultar cartas, etc.
+    }
+
+    function startNewGame() {
+      playerHealth = 100;
+      computerHealth = 100;
+      playerRounds = 0;
+      computerRounds = 0;
+      gameOver = false;
+
+      updateHealthBars();
+      updateRoundCounters();
+      resetVisuals();
+
+      document.getElementById("result").textContent = "🎮 Nueva partida iniciada. ¡Elige tu jugada!";
+    }
+  </script>
+</body>
+</html>
